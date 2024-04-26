@@ -1,0 +1,79 @@
+/* Cuerpo */
+body {
+    height: 100vh;
+    overflow-y: hidden;
+    background-image: url(/img/Picsart_24-04-15_23-25-07-074.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Base login */
+.login {
+    height: 80vh;
+    width: 30vw;
+    background-image: linear-gradient(to right top, #07091d, #121423, #1a1d29, #22252f, #2b2d35, #2c2c33, #2c2c30, #2c2b2e, #232224, #1a191a, #100f10, #000000);
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Titulo del login */
+.login_titulo {
+    position: absolute;
+    margin-bottom: 230px;
+    font-size: 50px;
+    color: white;
+}
+
+/* Boton */
+.btn {
+    margin-top: 20px;
+}
+
+/* Links */
+.links {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Links al ser visitados */
+.links:visited {
+    color: white;
+}
+
+/* Links al ser activados */
+.links:active {
+    color: white;
+}
+
+/* Linea vertical */
+.vertical-line {
+    border-right: 1px solid white;
+    height: 20px;
+    margin: 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Imagen logo */
+.imagen {
+    position: absolute;
+    height: 13%;
+    border-radius: 100px;
+    margin-bottom: 380px;
+
+}
+
+/* Formulario */
+.formulario {
+    margin-top: 145px;
+
+}
