@@ -1,3 +1,76 @@
+document.addEventListener('DOMContentLoaded', () => {
+    async function fetchPokemonList() {
+        const url = 'https://pokeapi.co/api/v2/pokemon?limit=150';
+        const response = await fetch(url);
+        const data = await response.json();
+        const pokemonList = data.results;
+
+        return pokemonList;
+    }
+
+    async function fetchPokemonDetails(pokemonUrl) {
+        const response = await fetch(pokemonUrl);
+        const pokemon = await response.json();
+        const name = pokemon.name;
+        const types = pokemon.types.map(typeInfo => typeInfo.type.name);
+        const imageUrl = pokemon.sprites.front_default;
+
+        return { name, types, imageUrl };
+    }
+
+    async function fetchAllTypes() {
+        const url = 'https://pokeapi.co/api/v2/type';
+        const response = await fetch(url);
+        const data = await response.json();
+        const types = data.results.map(type => type.name);
+        return types;
+    }
+
+    async function displayTypes() {
+        const types = await fetchAllTypes();
+        const typeFilter = document.getElementById('typeFilter');
+        types.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+            typeFilter.appendChild(option);
+        });
+    }
+
+    async function displayPokemon(filterType = '') {
+        const pokemonContainer = document.getElementById('pokemonContainer');
+        pokemonContainer.innerHTML = ''; // Clear previous results
+        const pokemonList = await fetchPokemonList();
+
+        for (const pokemon of pokemonList) {
+            const pokemonDetails = await fetchPokemonDetails(pokemon.url);
+            if (filterType && !pokemonDetails.types.includes(filterType)) {
+                continue;
+            }
+
+            const pokemonCard = document.createElement('div');
+            pokemonCard.classList.add('pokemon-card');
+
+            pokemonCard.innerHTML = `
+                <img src="${pokemonDetails.imageUrl}" alt="${pokemonDetails.name}">
+                <h3>${pokemonDetails.name}</h3>
+                <p>${pokemonDetails.types.join(', ')}</p>
+            `;
+
+            pokemonContainer.appendChild(pokemonCard);
+        }
+    }
+
+    window.filterPokemon = () => {
+        const filterType = document.getElementById('typeFilter').value;
+        displayPokemon(filterType);
+    };
+
+    displayTypes();
+    displayPokemon();
+});
+
+
 function validarFormulario(event) {
     event.preventDefault();
     var email = document.getElementById('email').value;
